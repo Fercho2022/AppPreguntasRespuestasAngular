@@ -1,0 +1,35 @@
+<h5 class="card-title">Resultado</h5>
+<p class="card-text">Este es el resultado del cuestionario!</p>
+<div *ngFor="let pregunta of listPreguntas; let i=index">
+  <h4 class="card-title" style="margin-top: 10px;">{{ pregunta.descripcionPregunta}}</h4>
+  <ul class="list-group">
+    <ng-container *ngFor="let respuesta of listPreguntas[i].respuesta; let j=index">
+      <li class="list-group-item" [ngClass]="{'list-group-item-success':respuesta.esCorrecta==1 && respuestasUsuario[i]==j,
+      'list-group-item-danger':respuesta.esCorrecta==0 && respuestasUsuario[i]==j}">
+    {{respuesta.nombre}}
+        <span class="badge" *ngIf="respuesta.esCorrecta==1 && respuestasUsuario[i]==j">
+          <p-avatar icon="pi pi-check" styleClass="mr-2" shape="circle"></p-avatar>
+        </span>
+        <span class="badge" *ngIf="respuesta.esCorrecta==0 && respuestasUsuario[i]==j">
+          <p-avatar icon="pi pi-times" styleClass="mr-2" shape="circle" [style]="{ 'background-color': '#ff0000', color: '#ffffff' }"></p-avatar>
+
+
+
+        </span>
+      </li>
+    </ng-container>
+  </ul>
+</div>
+
+<div class="row" style="margin-top: 20px;">
+  <div class="col-lg-4 offset-lg-4 d-grid gap-2">
+    <button
+      routerLink="/pregunta"
+      class="btn btn-info btn-lg btn-block"
+
+      (click)="volver()"
+    >
+      Volver
+    </button>
+  </div>
+</div>
